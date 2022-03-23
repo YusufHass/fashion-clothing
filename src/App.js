@@ -2,34 +2,42 @@ import './catagories.styles.scss'
 const App = () => {
 
   const catagories= [
-
     {
       id: 1,
-      title: 'Hats'
+      title: 'hats',
+      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
     },
     {
       id: 2,
-      title: 'Jackets'
-    },{
-      id: 3,
-      title: 'Sneakers'
-    },{
-      id: 4,
-      title: 'Men'
-    },{
-      id: 5,
-      title: 'Women'
+      title: 'jackets',
+      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
     },
-  ]
+    {
+      id: 3,
+      title: 'sneakers',
+      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+    },
+    {
+      id: 4,
+      title: 'womens',
+      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+    },
+    {
+      id: 5,
+      title: 'mens',
+      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+    },
+  ];
   return (
-    <div className="catagories-container">
+    <div className="categories-container">
 
-      {catagories.map(({title})=>(
-      <div className="catagory-container">
-        {/* {
-          imag } */}
-          <p> image</p>
-          <div className="catagory-body-container">
+      {catagories.map(({title, imageUrl, id})=>(
+      <div className="category-container">
+
+        <div className='background-image' style={{
+          backgroundImage: `url(${imageUrl})`
+        }}></div>
+          <div className="category-body-container">
             <h1>{title}</h1>
             <p>Shop Now</p>
           </div>
