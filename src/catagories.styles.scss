@@ -1,0 +1,36 @@
+// using 'sass' styling usage instead of css
+// first install using 'npm add sass'
+
+//the following used to style the parent and child container using
+/*
+.catagories-container {
+    background-color: red;
+    padding: 10px;
+}
+.catagories-container .catagory-container{
+    background-color: green;
+    padding: 10px
+}
+
+.catagories-container .catagory-container .catagory-body-container{
+    background-color: blue;
+}
+*/
+
+// using 'sass' it simplifies
+
+.catagories-container {
+  background-color: red;
+  padding: 10px;
+    .catagory-container {
+      background-color: green;
+      padding: 30px;
+      .catagory-body-container {
+        background-color: blue;
+        padding: 10px;
+      }
+    }
+  }
+
+
+
