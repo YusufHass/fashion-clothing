@@ -1,4 +1,6 @@
 import './catagories.styles.scss'
+
+import Catagory from './components/catagory-item/catagory-item.component';
 const App = () => {
 
   const catagories= [
@@ -30,18 +32,13 @@ const App = () => {
   ];
   return (
     <div className="categories-container">
-
+      {/* we can pass as catagories.map((catagory)=>(
+        <Catagory catagory= {catagory}/>
+        then we can distructure by passing catagory into th e catagiry-item-component.jsk and then
+        assining the value as const {title, imageUrl}= catagory
+      ))*/}
       {catagories.map(({title, imageUrl, id})=>(
-      <div className="category-container">
-
-        <div className='background-image' style={{
-          backgroundImage: `url(${imageUrl})`
-        }}></div>
-          <div className="category-body-container">
-            <h1>{title}</h1>
-            <p>Shop Now</p>
-          </div>
-      </div>
+        <Catagory key={id} title= {title} imageUrl= {imageUrl}/>
       ))}
       </div>
   );
