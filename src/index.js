@@ -8,6 +8,7 @@ ReactDOM.render(
     <BrowserRouter>
     <App/>
     </BrowserRouter>
+    {/* BrowserRouter now has rapped the entire App which means the whole application is included */}
   </React.StrictMode>,
   document.getElementById('root')
 );
