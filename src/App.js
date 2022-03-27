@@ -1,7 +1,8 @@
 import Home from "./routes/home/home.component";
-import { Outlet, Route, Routes } from "react-router-dom";
+import {Route, Routes } from "react-router-dom";
+import Navigation from "./routes/navigation/navigation.component";
 
-const ShopGreating = () => {
+const Shop = () => {
   return (
     <>
       <h1>Welcome to Fashion Clothing Store</h1>
@@ -10,16 +11,7 @@ const ShopGreating = () => {
   );
 };
 
-const Navigation = () => {
-  return (
-    <div>
-      <div>
-        <h1>I am the navigation bar</h1>
-      </div>
-      <Outlet />
-    </div>
-  );
-};
+
 const App = () => {
   return (
     <Routes>
@@ -29,7 +21,7 @@ const App = () => {
         <Route index element={<Home />} />
         {/* index represent to say 'true' and if '/' then display the 'Home'
         component instead of navigating the /home routing  */}
-        <Route path="greet" element={<ShopGreating />} />
+        <Route path="shop" element={<Shop />} />
 {/* the nested path makes us visit sub-routing */}
       </Route>
     </Routes>
