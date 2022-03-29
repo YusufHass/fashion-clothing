@@ -1,10 +1,16 @@
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
+
+//for authentication
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
+
+//for the database while 'doc' retrieves the data
+import {getFirestore,doc,getDoc, setDoc } from 'firebase/firestore'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAx2SojoBV6SRWL-gDxfsvegzH6wSd_zqw",
@@ -24,4 +30,43 @@ provider.setCustomParameters({
     
 });
 export const auth= getAuth();
-export const signInWithGooglePopup=()=>signInWithPopup(auth, provider);
+export const signInWithGooglePopup=()=>signInWithPopup(auth,provider);
+
+export const db= getFirestore();
+// the following code says give me the doc reference from the db under the 
+// users collections for userAuth.uid customer
+export const createUserDocumentFromAuth= async(userAuth)=>{
+//the following is to for the database. 'uid' is the firebase instances
+// that come up with firebase.
+    const userDocRef= doc(db, 'users', userAuth.uid);
+    const userSnapShot= await getDoc(userDocRef);
+
+    console.log(userSnapShot);
+    console.log(userSnapShot.exists());
+    //check first the user data is existed and if it doesnt 
+    //exist then create and set the doc
+// displayName ahd email are a part of the firebase auth incentances
+// you can check the instances using the console log after log in using 
+// the google auth
+    if(!userSnapShot.exists())
+    {
+      const {displayName, email}= userAuth;
+      const createAt= new Date();
+      
+      try 
+      {
+        await setDoc(userDocRef,
+        {
+          displayName,
+          email,
+          createAt
+        })}
+        catch(error)
+        {
+          console.log('Error creating the user', error.message);
+        }
+      }
+      //otherwise if the userDocRef is true then return it
+      return userDocRef;
+    }
+  
