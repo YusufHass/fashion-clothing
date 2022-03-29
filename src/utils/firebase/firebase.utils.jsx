@@ -23,15 +23,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-const provider= new GoogleAuthProvider();
-provider.setCustomParameters({
+//there are differnt providers such as github and reddit or facebook etc and we use google provide
+const googleProvider= new GoogleAuthProvider();
+googleProvider.setCustomParameters({
     // everytime user intracts google sign in auth then generate/prompt the avaliable the user accounts
     prompt: 'select_account'
     
 });
 export const auth= getAuth();
-export const signInWithGooglePopup=()=>signInWithPopup(auth,provider);
 
+//signin with google
+export const signInWithGooglePopup=()=>signInWithPopup(auth,googleProvider);
+//google redirect
+export const signInWithGoogleRedirect=()=>signInWithRedirect(auth, googleProvider)
 export const db= getFirestore();
 // the following code says give me the doc reference from the db under the 
 // users collections for userAuth.uid customer
