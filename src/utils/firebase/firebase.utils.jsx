@@ -7,6 +7,8 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,FacebookAuthProvider,
+  TwitterAuthProvider
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
