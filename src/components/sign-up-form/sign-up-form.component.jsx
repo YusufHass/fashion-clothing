@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  auth,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
 
 const defaultFormFeilds = {
@@ -11,21 +15,46 @@ const defaultFormFeilds = {
 const SIgnUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFeilds);
   const { displayName, email, password, confirmPassword } = formFields;
-  console.log(formFields)
+  console.log(formFields);
 
-  const handleSubmit= async (event)=>{
+  const resetFormFields= ()=>{
+    setFormFields(defaultFormFeilds)
 
-    event.preventDefault();
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Password doesnt match");
+      return;
+    }
+    //otherwise if they match
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await createUserDocumentFromAuth(user, { displayName });
+      //resets the form field empty once the form has submitted
+      resetFormFields();
+      console.log(user);
+    } catch (error) {
+      if(error.code==='auth/email-already-in-use'){
+        alert('cannot create user email, already in use')
+      }
+      console.log("User creation error", error);
+    }
+  };
   const handleChanges = (event) => {
     const { name, value } = event.target;
-    setFormFields({...formFields, [name]:value})
+    setFormFields({ ...formFields, [name]: value });
   };
 
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <label>Display Name</label>
         {/* while 'name' is where we passed to the event, 'displayName, email, password' are we declare in the form object */}
         <input
