@@ -58,16 +58,14 @@ const SIgnUpForm = () => {
         {/* while 'name' is where we passed to the event, 'displayName, email, password' are we declare in the form object */}
         <FormInput
           label="Display Name"
-          inputOptions={{
-            type: "text",
-            required: true,
-            onChange:  handleChanges ,
-            name: "displayName",
-            value: displayName ,
-          }}
+          type="text"
+          required
+          onChange={handleChanges}
+          name="displayName"
+          value={displayName}
         />
         {/* value represents anything we passes to the value of email etc.. if we passed string 'email' then we get email as the value */}
-        {/* <FormInput
+        <FormInput
           label="Email"
           type="email"
           required
@@ -90,7 +88,7 @@ const SIgnUpForm = () => {
           onChange={handleChanges}
           name="confirmPassword"
           value={confirmPassword}
-        ></FormInput> */}
+        ></FormInput>
         <button type="submit">Sign Up </button>
       </form>
     </div>
