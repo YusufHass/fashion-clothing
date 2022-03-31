@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,FacebookAuthProvider,
-  TwitterAuthProvider
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
@@ -42,6 +42,7 @@ export const db= getFirestore();
 // the following code says give me the doc reference from the db under the 
 // users collections for userAuth.uid customer
 export const createUserDocumentFromAuth= async(userAuth)=>{
+  if(!userAuth) return;
 //the following is to for the database. 'uid' is the firebase instances
 // that come up with firebase.
     const userDocRef= doc(db, 'users', userAuth.uid);
@@ -75,4 +76,9 @@ export const createUserDocumentFromAuth= async(userAuth)=>{
       //otherwise if the userDocRef is true then return it
       return userDocRef;
     }
-  
+  export const createAuthUserWithEmailAndPasswor= async (email, password)=>{
+    //if either password or email is missing then do nothing
+    if(!email || !password) return
+
+    return await createAuthUserWithEmailAndPasswor(auth, email,password)
+  }
