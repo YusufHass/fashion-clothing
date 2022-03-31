@@ -7,7 +7,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
-  GithubAuthProvider,FacebookAuthProvider,
+  FacebookAuthProvider,
   createUserWithEmailAndPassword
 } from "firebase/auth";
 
@@ -41,7 +41,9 @@ export const signInWithGoogleRedirect=()=>signInWithRedirect(auth, googleProvide
 export const db= getFirestore();
 // the following code says give me the doc reference from the db under the 
 // users collections for userAuth.uid customer
-export const createUserDocumentFromAuth= async(userAuth)=>{
+
+//dispay name will be written in the additionalInformation for the email and password login
+export const createUserDocumentFromAuth= async(userAuth, additionalInformation={})=>{
   if(!userAuth) return;
 //the following is to for the database. 'uid' is the firebase instances
 // that come up with firebase.
@@ -57,6 +59,7 @@ export const createUserDocumentFromAuth= async(userAuth)=>{
 // the google auth
     if(!userSnapShot.exists())
     {
+      //displayName and email here is null
       const {displayName, email}= userAuth;
       const createAt= new Date();
       
@@ -66,7 +69,8 @@ export const createUserDocumentFromAuth= async(userAuth)=>{
         {
           displayName,
           email,
-          createAt
+          createAt,
+          ...additionalInformation,
         })}
         catch(error)
         {
