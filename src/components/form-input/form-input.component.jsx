@@ -11,7 +11,7 @@ const FormInput = ({ label, ...restOfProps }) => {
         <label
           // if in the input feild of otherProps has input value then shrink otherwise back to default
           className={`${
-            restOfProps.value.lengh ? "shrink" : ""
+            restOfProps.value.length ? "shrink" : ""
           } form-input-label`}
         >
           {label}

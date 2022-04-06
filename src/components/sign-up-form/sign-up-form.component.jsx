@@ -6,6 +6,8 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
+import './sign-up-form.styles.scss'
+import Button from "../../button/button.component";
 
 const defaultFormFeilds = {
   displayName: "",
@@ -52,8 +54,9 @@ const SIgnUpForm = () => {
   };
 
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account? </h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         {/* while 'name' is where we passed to the event, 'displayName, email, password' are we declare in the form object */}
         <FormInput
@@ -89,7 +92,7 @@ const SIgnUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         ></FormInput>
-        <button type="submit">Sign Up </button>
+        <Button buttonType='google' type="submit">Sign Up </Button>
       </form>
     </div>
   );
