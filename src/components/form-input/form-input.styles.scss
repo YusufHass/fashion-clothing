@@ -27,7 +27,7 @@ $main-color: black;
     &:focus {
       outline: none;
     }
-// make the input feild shirnkable when user enters a value
+
     &:focus ~ .form-input-label {
       @include shrinkLabel();
     }
