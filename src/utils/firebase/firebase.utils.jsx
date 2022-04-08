@@ -8,7 +8,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
@@ -50,8 +51,8 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
     const userDocRef= doc(db, 'users', userAuth.uid);
     const userSnapShot= await getDoc(userDocRef);
 
-    console.log(userSnapShot);
-    console.log(userSnapShot.exists());
+    // console.log(userSnapShot);
+    // console.log(userSnapShot.exists());
     //check first the user data is existed and if it doesnt 
     //exist then create and set the doc
 // displayName ahd email are a part of the firebase auth incentances
@@ -85,4 +86,11 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
     if(!email || !password) return
 
     return await createAuthUserWithEmailAndPasswor(auth, email,password)
+  }
+
+  export const signInAuthUserWithEmailAndPassword= async (email, password)=>{
+    //if either password or email is missing then do nothing
+    if(!email || !password) return
+
+    return await signInWithEmailAndPassword(auth, email,password)
   }
