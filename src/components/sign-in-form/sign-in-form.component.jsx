@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import {
   auth,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword
+  signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
 import "./sign-in-form.styles.scss";
 import Button from "../../button/button.component";
+import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFeilds = {
   email: "",
@@ -20,31 +21,40 @@ const SignInForm = () => {
   const { email, password } = formFields;
   // console.log(formFields);
 
+  //resets the form back to empty once we filled and submit the form
   const resetFormFields = () => {
     setFormFields(defaultFormFeilds);
   };
+//setCurrentUser is distructured from the UserContext component
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //try sign in using email and password 
+    //try sign in using email and password
     try {
-      const respond=  await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(respond);
-
+      const { user } = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(user);
+      //set the user value what ever the respond is
+      setCurrentUser(user);
       //resets the form field empty once the form has submitted
       resetFormFields();
       // console.log(user);
     } catch (error) {
-      switch(error.code){
-        case 'auth/wrong-password':
-          alert('Wrong password is entered');
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Wrong password is entered");
           break;
-          case 'auth/user-not-found':
-          alert('No user associated to this email ');
+        case "auth/user-not-found":
+          alert("No user associated to this email ");
           break;
-          case 'auth/too-many-requests':
-            alert('Failed login for many attempts. You can immediately restore it by resetting your password or you can try again later')
-          default: 
+        case "auth/too-many-requests":
+          alert(
+            "Failed login for many attempts. You can immediately restore it by resetting your password or you can try again later"
+          );
+        default:
           console.log(error);
       }
     }
@@ -90,9 +100,11 @@ const SignInForm = () => {
           <Button type="submit">Sign In </Button>
           {/* by default the button is always associated with a 
           'submit' so we need to give another name to a button we used and in this case we gave 'button' as a type*/}
-          <Button type= 'button' buttonType="google" onClick={signInWithGoogle}>Google</Button>
-          </div> 
-           </form>
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+            Google
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
