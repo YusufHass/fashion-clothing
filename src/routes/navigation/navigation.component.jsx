@@ -3,11 +3,19 @@ import { Link, Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import "./navigation.styles.scss";
 import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 const Navigation = () => {
-//currentUser is distructured from the UserContext component which 
-//the value is set inside sign-in component using setCurrentUser
-  const {currentUser} = useContext(UserContext);
-  console.log(currentUser)
+  //currentUser is distructured from the UserContext component which
+  //the value is set inside sign-in component using setCurrentUser
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  console.log(currentUser);
+
+  const signOutHandler= async ()=>{
+
+    await signOutUser();
+    //setting the current user null makes sign out and calls the sign in condition
+    setCurrentUser(null);
+  }
   return (
     <Fragment>
       <div className="navigation">
@@ -18,9 +26,17 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
+          {/* when the current user is sign-in then display the sigh-in 
+          otherwise display the sign-out text */}
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       {/* Outlet displays the rest routing after the above text */}

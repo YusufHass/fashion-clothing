@@ -9,7 +9,8 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
@@ -94,3 +95,5 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
 
     return await signInWithEmailAndPassword(auth, email,password)
   }
+//the signout firebase method used to make the user sign out. THe auth tracks the current sign-in user
+  export const signOutUser= async()=> await signOut(auth)
