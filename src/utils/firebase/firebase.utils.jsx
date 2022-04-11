@@ -10,7 +10,12 @@ import {
   FacebookAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  // onAuthStateChanged keeps our user data such as sign-in and out in one palace.
+  //earlier we had to track user activity in sign-in, sign-out and navigation
+  //component using  setCurrentUser(user) which no more important as onAuthStateChanged centralize all
+
+  onAuthStateChanged
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
@@ -97,3 +102,11 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
   }
 //the signout firebase method used to make the user sign out. THe auth tracks the current sign-in user
   export const signOutUser= async()=> await signOut(auth)
+
+
+  //listens the changes of our application. Example when we sign
+  //in or sign-out both time reacts to the change and callback is invoked
+  export const onAuthStateChangedListner=(callback)=>{
+
+    onAuthStateChanged(auth, callback)
+  }

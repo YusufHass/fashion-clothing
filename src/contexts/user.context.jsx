@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { onAuthStateChangedListner } from "../utils/firebase/firebase.utils";
+
 
 //where we use as storage and call
 // the createContext and the actual value that we want access
@@ -15,6 +17,15 @@ export const UserProvider = ({ children }) => {
   //now the UserProvider is allowing accessing its 'children' 
   //to its useState and in this case the currentUser
   const value = { currentUser, setCurrentUser };
+
+  useEffect (()=>{
+//unsubscribe makes disble the onAuthStateChangedListner when the state is unmount
+    const unsubscribe=onAuthStateChangedListner((user)=>{
+      console.log(user)
+    })
+    return unsubscribe;
+
+  }, [])
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
