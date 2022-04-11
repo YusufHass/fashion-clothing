@@ -26,7 +26,7 @@ const SignInForm = () => {
     setFormFields(defaultFormFeilds);
   };
 //setCurrentUser is distructured from the UserContext component
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,9 +36,9 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(user);
+      // console.log(user);
       //set the user value what ever the respond is
-      setCurrentUser(user);
+      // setCurrentUser(user);
       //resets the form field empty once the form has submitted
       resetFormFields();
       // console.log(user);

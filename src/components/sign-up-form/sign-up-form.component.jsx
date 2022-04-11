@@ -22,7 +22,7 @@ const SIgnUpForm = () => {
   // console.log(formFields);
 
 
-  const {setCurrentUser}= useContext(UserContext);
+  // const {setCurrentUser}= useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFeilds);
@@ -42,7 +42,7 @@ const SIgnUpForm = () => {
         password
       );
       //sets the user into the setCurrentUser state and shows the updated value in the currentUser of navigation component
-      setCurrentUser(user);
+      // setCurrentUser(user);
       await createUserDocumentFromAuth(user, { displayName });
       //resets the form field empty once the form has submitted
       resetFormFields();

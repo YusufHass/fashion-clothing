@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { onAuthStateChangedListner } from "../utils/firebase/firebase.utils";
+import { onAuthStateChangedListner,signOutUser } from "../utils/firebase/firebase.utils";
 
 
 //where we use as storage and call
@@ -17,11 +17,14 @@ export const UserProvider = ({ children }) => {
   //now the UserProvider is allowing accessing its 'children' 
   //to its useState and in this case the currentUser
   const value = { currentUser, setCurrentUser };
+  //this makes the user signs out and makes empty since getAuth in the firebase remembers the last user even after sign out and displays in the cosole
+  // signOutUser();
 
   useEffect (()=>{
 //unsubscribe makes disble the onAuthStateChangedListner when the state is unmount
     const unsubscribe=onAuthStateChangedListner((user)=>{
       console.log(user)
+      setCurrentUser(user)
     })
     return unsubscribe;
 
