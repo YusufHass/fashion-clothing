@@ -4,14 +4,18 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
+import { ProductProvider } from "../src/contexts/products.context";
 ReactDOM.render(
   <React.StrictMode>
     {/* BrowserRouter now has wrapped the entire App which 
         means the whole application is included */}
     <BrowserRouter>
-    {/* now the UserProvider has the access to the App componetn and App is the parent of the rest of component */}
+      {/* now the UserProvider has the access to the App componetn and App is the parent of the rest of component */}
       <UserProvider>
-        <App />
+        {/* the product provider is the child of the userProvider  */}
+        <ProductProvider>
+          <App />
+        </ProductProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -1,4 +1,5 @@
 
+import Shop from "../../routes/shop/shop.component";
 import CatagoryItem from "../catagories/catagory-item.component";
 import './directory-list.styles.scss'
 const DirectoryList = ({catagories}) => {

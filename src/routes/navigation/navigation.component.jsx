@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/user.context";
 import "./navigation.styles.scss";
 import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import Shop from "../shop/shop.component";
 const Navigation = () => {
   //currentUser is distructured from the UserContext component which
   //the value is set inside sign-in component using setCurrentUser
