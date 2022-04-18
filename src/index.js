@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
 import { ProductProvider } from "../src/contexts/products.context";
+import { CartProvider } from "./contexts/cart.context";
 ReactDOM.render(
   <React.StrictMode>
     {/* BrowserRouter now has wrapped the entire App which 
@@ -14,7 +15,10 @@ ReactDOM.render(
       <UserProvider>
         {/* the product provider is the child of the userProvider  */}
         <ProductProvider>
-          <App />
+          {/* CartProvider is the child of the UserProvider so the parent has access */}
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ProductProvider>
       </UserProvider>
     </BrowserRouter>
