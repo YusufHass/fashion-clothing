@@ -6,6 +6,7 @@ import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import Shop from "../shop/shop.component";
 import CardIcon from "../../components/cart-icon/cart-icon.component";
+import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 const Navigation = () => {
   //currentUser is distructured from the UserContext component which
   //the value is set inside sign-in component using setCurrentUser
@@ -35,6 +36,7 @@ const Navigation = () => {
           )}
           <CardIcon/>
         </div>
+        <CardDropDown/>
       </div>
       {/* Outlet displays the rest routing after the above text */}
       <Outlet />
