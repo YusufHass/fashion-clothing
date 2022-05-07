@@ -1,9 +1,28 @@
+import { useContext } from 'react';
 import './checkout.styles.scss'
+import {CartContext} from '../../contexts/cart.context'
 
 const Checkout = () => {
+    const {cartItems}= useContext(CartContext)
   return (
     <div className="div">
       <h2>Iam the checkout page</h2>
+      <div className="div">
+
+          {
+              cartItems.map((cartItem)=>{
+                  const {id, name ,quantity}= cartItem;
+                  return(
+                  <div className="div" key={id}>
+                      <h1>{name}</h1>
+                      <span>{quantity}</span>
+
+                  </div>
+                  )
+
+              })
+          }
+      </div>
     </div>
   );
 };
