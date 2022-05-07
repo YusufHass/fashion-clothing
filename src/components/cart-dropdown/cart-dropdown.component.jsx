@@ -5,7 +5,7 @@ import { useContext} from 'react'
 import {CartContext} from '../../contexts/cart.context'
 import { useNavigate } from 'react-router-dom'
 const CardDropDown=()=>{
-
+//using useNavigate component to navigate/path without using the route
     const navigate= useNavigate();
 
     const goToCheckoutHandler= ()=>{
