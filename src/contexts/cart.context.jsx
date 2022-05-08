@@ -66,7 +66,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount]= useState(0);
   const [cartTotal, setCartTotal]= useState(0);
-//useEffect for counting 
+//useEffect for counting to display the total numbers of item inside cart icon
   useEffect(()=>{
     const newCartCount= cartItems.reduce((total, cartItem)=> total+ cartItem.quantity, 0 )
     setCartCount(newCartCount)
