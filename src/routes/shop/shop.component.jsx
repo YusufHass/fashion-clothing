@@ -1,4 +1,4 @@
-import SHOP_DATA from "../../shop-data.json";
+import SHOP_DATA from "../../shops-data.json";
 import { ProductContext } from "../../contexts/products.context";
 import { useContext } from "react";
 import ProductCard from "../../product-card/product-card.component";

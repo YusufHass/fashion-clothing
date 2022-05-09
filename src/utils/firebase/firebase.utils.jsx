@@ -19,7 +19,7 @@ import {
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
-import {getFirestore,doc,getDoc, setDoc } from 'firebase/firestore'
+import {getFirestore,doc,getDoc, setDoc, collection, writeBatch} from 'firebase/firestore'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAx2SojoBV6SRWL-gDxfsvegzH6wSd_zqw",
@@ -34,6 +34,25 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 //there are differnt providers such as github and reddit or facebook etc and we use google provide
 const googleProvider= new GoogleAuthProvider();
+
+//the following collection is used to store our cloth collection into a database. 
+//collectionKey will representing the name of our data collection and  
+//objectsToAdd is the fil we have in the shop-data.js
+export const addCollectionAndDocuments= async (collectionKey, objectsToAdd)=>{
+  //collectionRef is used as reference to go our db-the name of the entire collection where we store our data and collectionKey is the name of our collection under our db
+const collectionRef= collection(db, collectionKey );
+
+// batch is instance of writeBatch function and used to do anything such as delete, add, remove the files we have in db
+const batch= writeBatch(db);
+
+objectsToAdd.forEach((object)=>{
+  const docRef= doc(collectionRef, object.title.toLowerCase());
+  batch.set(docRef, object)
+})
+await batch.commit();
+console.log('done');
+
+}
 googleProvider.setCustomParameters({
     // everytime user intracts google sign in auth then generate/prompt the avaliable the user accounts
     prompt: 'select_account'
