@@ -19,7 +19,10 @@ import {
 } from "firebase/auth";
 
 //for the database while 'doc' retrieves the data
-import {getFirestore,doc,getDoc, setDoc, collection, writeBatch} from 'firebase/firestore'
+//for fetching data from firebase we use query and getDocs
+
+
+import {getFirestore,doc,getDoc, setDoc, collection, writeBatch,query,getDocs} from 'firebase/firestore'
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAx2SojoBV6SRWL-gDxfsvegzH6wSd_zqw",
@@ -35,7 +38,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 //there are differnt providers such as github and reddit or facebook etc and we use google provide
 const googleProvider= new GoogleAuthProvider();
 
-//the following collection is used to store our cloth collection into a database. 
+//the following collection is used to store/add our cloth collection into a database. 
 //collectionKey will representing the name of our data collection and  
 //objectsToAdd is the fil we have in the shop-data.js
 export const addCollectionAndDocuments= async (collectionKey, objectsToAdd)=>{
@@ -53,6 +56,27 @@ await batch.commit();
 console.log('done');
 
 }
+//since google and any library could change their implementation
+// anytime then using a self declared separate function
+//decreases the overall impact of our application. If any of the
+// following firebase functions change then the only thing
+//we need to change is that specific change here in our function. That is one of 
+// the benefits that isolating the functions based on what they specifically do
+export const getCatagoriesAndDocuments= async ()=>{
+
+  const collectionRef= collection(db, 'categories');
+  const q= query(collectionRef);
+  const querySnapshot= await getDocs(q);
+  const categoryMap=querySnapshot.docs.reduce((accumulator,
+    docSnapshot)=>{
+
+      const{title, items}= docSnapshot.data();
+      accumulator[title.toLowerCase()]=items;
+      return accumulator;
+    },{})
+    return categoryMap;
+}
+
 googleProvider.setCustomParameters({
     // everytime user intracts google sign in auth then generate/prompt the avaliable the user accounts
     prompt: 'select_account'
