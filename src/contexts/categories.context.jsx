@@ -2,21 +2,20 @@ import { createContext, useContext, useState, useEffect} from "react";
 // import PRODUCTS from "../shops-data.json";
 import SHOP_DATA from "../shop-data.js";
 import { addCollectionAndDocuments, getCatagoriesAndDocuments} from "../utils/firebase/firebase.utils.jsx";
-export const ProductContext= createContext({
+export const CategoriesContext= createContext({
 //where we store products as an array
-    products: [],
+    categoriesMap: {},
 });
-export const ProductProvider=({children})=>{
+export const CategoriesProvider=({children})=>{
 //default value is assigned as products 
-    const [products, setProducts]= useState([]);
+    const [categoriesMap, setCategoriesMap]= useState({});
 //this useEffect is used to write ourdata into the db and once we successfully added to the db then we can delete it since we need it once only
    
 // useEffect(()=>{
 //         addCollectionAndDocuments('cagteories', SHOP_DATA)
 
 //     }, [])
-    //and passed the products as a props 
-    const value= {products}
+    
 
     //useEffect to fetch the data we stored in our 'categories' db
 
@@ -28,15 +27,18 @@ export const ProductProvider=({children})=>{
 
             const categoryMap= await getCatagoriesAndDocuments();
             console.log(categoryMap);
+            setCategoriesMap(categoryMap)
         }
         getCategoryMap();
 
     }, []);
+    //and passed the products as a props 
+    const value= {categoriesMap}
 
     return (
 
-        <ProductContext.Provider value={value}>
+        <CategoriesContext.Provider value={value}>
             {children}
-        </ProductContext.Provider>
+        </CategoriesContext.Provider>
     )
 }

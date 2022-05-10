@@ -43,7 +43,13 @@ const googleProvider= new GoogleAuthProvider();
 //objectsToAdd is the fil we have in the shop-data.js
 export const addCollectionAndDocuments= async (collectionKey, objectsToAdd)=>{
   //collectionRef is used as reference to go our db-the name of the entire collection where we store our data and collectionKey is the name of our collection under our db
-const collectionRef= collection(db, collectionKey );
+//go to the db and find the spacific collection called collectionKey
+  const collectionRef= collection(db, collectionKey );
+//transaction is a sucessful unit of work in the database.
+//example, if we transfer a money from one accoount to 
+//another account then the whole process and successful transaction
+//called a transaction. If it fails then we say the transaction is
+// failed
 
 // batch is instance of writeBatch function and used to do anything such as delete, add, remove the files we have in db
 const batch= writeBatch(db);

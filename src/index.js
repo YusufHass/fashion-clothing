@@ -4,7 +4,7 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
-import { ProductProvider } from "../src/contexts/products.context";
+import { CategoriesProvider } from "../src/contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 ReactDOM.render(
   <React.StrictMode>
@@ -13,13 +13,13 @@ ReactDOM.render(
     <BrowserRouter>
       {/* now the UserProvider has the access to the App componetn and App is the parent of the rest of component */}
       <UserProvider>
-        {/* the product provider is the child of the userProvider  */}
-        <ProductProvider>
+        {/* the CategoriesProvider is the child of the userProvider  */}
+        <CategoriesProvider>
           {/* CartProvider is the child of the UserProvider so the parent has access */}
           <CartProvider>
             <App />
           </CartProvider>
-        </ProductProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
