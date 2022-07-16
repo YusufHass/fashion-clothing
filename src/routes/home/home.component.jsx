@@ -1,7 +1,7 @@
 // import "./catagories.styles.scss";
 
 import { Outlet } from "react-router-dom";
-import DirectoryList from "../../components/directory/directory-list.component";
+import Directory from "../../components/directory/directory-list.component";
 
 const Home = () => {
   const catagories = [
@@ -33,7 +33,7 @@ const Home = () => {
   ];
   return (
     <>
-      <DirectoryList catagories={catagories} />
+      <Directory catagories={catagories} />
       <Outlet></Outlet>
       {/* <Outlet makes the nested routing (greet route in the home-component.jsx) display at the bottom of the page
       . if we place it above the DirectoryList then it shows above the page  */}
