@@ -31,7 +31,7 @@ has another route and it matchs shop/sub-route. And it always first route <Shop>
 the route goes into the sub-routes that are located inside Shop compoent */}
 
         {/* <Route path="shop" element={<Shop />} /> */}
-        <Route path="shop/*" element={<Shop />} />
+        <Route path="shop*" element={<Shop />} />
 
 
         <Route path="auth" element={<Authentication />} />

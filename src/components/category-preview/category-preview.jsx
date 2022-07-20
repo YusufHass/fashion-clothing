@@ -1,6 +1,6 @@
 // this component creats the category for each title.
-//example the first page diplays the 'hat' with 4 products and when it cl
-// clicked then it diplays the rest of 'hats' similar products
+//example the first page diplays the 'hat' with 4 products and when it's
+// clicked the title then it takes us to another page and diplays the rest of 'hats' similar products
 import { Link } from "react-router-dom";
 import ProductCard from "../../product-card/product-card.component";
 import "./category-preview.styles.scss";

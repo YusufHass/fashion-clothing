@@ -21,6 +21,10 @@ const Category = () => {
   }, [category, categoriesMap]);
   return (
     <Fragment>
+      {/* the following code displays the title 
+      each category on the top of the items. once we click the title
+      on the main category then it will takes us to another page
+      to show us the list of items in that catogry while it will shows us the title on the head*/}
       <h1 className="category-title">{category.toUpperCase()}</h1>
       <div className="category-container">
         {
