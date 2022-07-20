@@ -1,11 +1,11 @@
 import { Fragment, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
-import "./navigation.styles.scss";
+import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles";
 import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import Shop from "../shop/shop.component";
-import CardIcon from "../../components/cart-icon/cart-icon.component";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import {CartContext } from "../../contexts/cart.context";
 const Navigation = () => {
@@ -17,30 +17,35 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+      {/* <div className="navigation"> */}
+        <LogoContainer to="/">
           <FashionClothingLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
+        </LogoContainer>
+        
+        {/* <div className="nav-links-container"> */}
+        <NavLinksContainer>
+        <NavLink to="/shop">
             SHOP
-          </Link>
+          </NavLink>
+          
           {/* when the current user is sign-in then display the sigh-in 
           otherwise display the sign-out text */}
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>
+            <NavLink as='span' onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
+            <NavLink to="/auth">
               SIGN IN
-            </Link>
+            </NavLink>
           )}
-          <CardIcon/>
-        </div>
+          <CartIcon/>
         {isCartOpen && <CardDropDown/>}
-      </div>
-      {/* Outlet displays the rest routing after the above text */}
+      </NavLinksContainer>
+      </NavigationContainer>
+            {/* Outlet displays the rest routing after the above text */}
+
       <Outlet />
     </Fragment>
   );
