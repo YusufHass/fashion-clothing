@@ -9,7 +9,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
 import "./sign-in-form.styles.scss";
-import Button from "../../button/button.component";
+import Button, {BUTTON_TYPES_CLASSES} from "../../button/button.component";
 import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFeilds = {
@@ -99,7 +99,7 @@ const SignInForm = () => {
           <Button type="submit">Sign In </Button>
           {/* by default the button is always associated with a 
           'submit' so we need to give another name to a button we used and in this case we gave 'button' as a type*/}
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType={BUTTON_TYPES_CLASSES.google} onClick={signInWithGoogle}>
             Google
           </Button>
         </div>
