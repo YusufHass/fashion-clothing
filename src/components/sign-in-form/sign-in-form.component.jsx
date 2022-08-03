@@ -29,6 +29,7 @@ const SignInForm = () => {
   // const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
+    //the preventDefault protects automatic submission without our permission
     event.preventDefault();
     //try sign in using email and password
     try {
