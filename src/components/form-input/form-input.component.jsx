@@ -8,7 +8,8 @@ const FormInput = ({ label, ...restOfProps }) => {
       <Input {...restOfProps} />
       {/* if leble exists then render the label */}
       {label && (
-        /* // if in the input feild of otherProps has input value then shrink otherwise back to default
+        /* // if in the input feild of otherProps has input value then 
+      otherwise back to default
           className={`${
             restOfProps.value.length ? "shrink" : ""
           } form-input-label`} */
