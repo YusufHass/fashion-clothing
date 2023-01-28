@@ -1,4 +1,4 @@
-//any thing with the slash (/) then 
-//redirect them to the index.html
+/*if the code has anything with the slash (/) then 
+redirect them to the index.html so the */
 
 /* /index.html 200
