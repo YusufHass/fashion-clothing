@@ -1,0 +1,3 @@
+the title and icon has changed in the index.html.
+
+to change the icon download, the icon you want, save it inside the public folder, and delete already existed favicon.ico file and change the downloaded icon file name to favicon.ico
