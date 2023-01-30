@@ -5,6 +5,6 @@ because it single page application is managing changing
 path from fronend insted of backend. Therefor the code at the end of the page
 saying that if the code has slash with anything (/*) then 
 redirect them to the index.html so from the index.html any 
-routing could be found */
+routing could be found  and the status will be 200*/
 
 /* /index.html 200
