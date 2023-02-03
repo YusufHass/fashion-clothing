@@ -1,4 +1,5 @@
 //custom context useContext
+import { useContext, useReducer } from "react";
 import { createContext, useEffect, useState } from "react";
 import {
   onAuthStateChangedListner,
@@ -12,11 +13,62 @@ export const UserContext = createContext({
   setCurrentUser: () => null,
 });
 
+//In the following code, we will see how to useReducers. useReducers 
+// is used for the same reason as the useContext and both manages the
+// state, however, the the way they implementing is different.
+//  While useContext uses useState and useEffect to update the state,
+//  useReducer updates the state based on the state and action
+// Look the following code how the code is switched to useReducer from useContextand 
+// for to provide the same functionality
+
+export const USER_ACTION_TYPES= {
+  SET_CURRENT_USER: 'SET_CURRENT_USER'
+}
+const userReducer= (state, action)=>{
+  console.log('dispatched');
+  console.log(action);
+
+  const {type, payload}= action;
+
+  switch (type){
+
+    // //in this case we have only one state that we are updating thus 
+    // we have only one switch statement and if the state is 
+    // not updating error will throw
+
+    // if we have increment number for example, we may write 
+    //             case 'increment':
+    //             return {
+    //               value: state.value+1,
+    //             }
+
+    // case 'SET_CURRENT_USER':
+    case USER_ACTION_TYPES.SET_CURRENT_USER: 
+      //this gives all previous state as they are then update the relevant value
+      // needed or currentUser in this case
+      // based ont he payload 
+       return {...state,
+
+      currentUser: payload
+    }
+    default: throw new Error (`unhandled type ${type} in userReducer`);
+  }
+}
+const INITIAL_STATE= {
+  currentUser: null,
+}
 //then we have the provider and recive a childern and
 //and returns .Povider. And every context build
 // has a .provider and /provide is a  component that wraps any other compoents the value inside our context
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
+ const [{currentUser}, dispatch] = useReducer(userReducer, INITIAL_STATE);
+ console.log (currentUser);
+
+ const setCurrentUser= (user)=>{
+  dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user});
+ }
+
   //now the UserProvider is allowing accessing its 'children'
   //to its useState and in this case the currentUser
   const value = { currentUser, setCurrentUser };
