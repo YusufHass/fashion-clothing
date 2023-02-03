@@ -5,7 +5,7 @@ import {
   onAuthStateChangedListner,
   signOutUser, createUserDocumentFromAuth
 } from "../utils/firebase/firebase.utils";
-
+import {creatAction} from '../utils/reducer/reducer.util'
 //where we use as storage and call
 // the createContext and the actual value that we want access
 export const UserContext = createContext({
@@ -66,7 +66,7 @@ export const UserProvider = ({ children }) => {
  console.log (currentUser);
 
  const setCurrentUser= (user)=>{
-  dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user});
+  dispatch(creatAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
  }
 
   //now the UserProvider is allowing accessing its 'children'

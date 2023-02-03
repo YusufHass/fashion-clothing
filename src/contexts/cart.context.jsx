@@ -1,5 +1,7 @@
 import { useReducer } from "react";
 import { createContext, useEffect, useState } from "react";
+
+import {creatAction} from '../utils/reducer/reducer.util'
 // the following helper function is used to increment the number of item in the cart
 const addCartItem = (cartItems, productToAdd) => {
   //finding an existing product from the array
@@ -137,14 +139,11 @@ export const CartProvider = ({ children }) => {
       0
     );
 
-    dispatch({
-      type: CART_ACTION_TYPES.SET_CART_ITEMS,
-      payload: {
-        cartItems: newCartItems,
+    dispatch(creatAction(CART_ACTION_TYPES.SET_CART_ITEMS,
+        {cartItems: newCartItems,
         cartCount: newCartCount,
-        cartTotal: newCartTotal,
-      },
-    });
+        cartTotal: newCartTotal})
+    );
   };
 
   // a function call to add or increment in the cart
@@ -163,7 +162,7 @@ export const CartProvider = ({ children }) => {
     updateCartItemReducer(newCartItems);
   };
   const setIsCartOpen=(bool)=>{
-    dispatch({type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload:bool})
+    dispatch(creatAction(CART_ACTION_TYPES.SET_IS_CART_OPEN,bool));
   }
   const value = {
     isCartOpen,

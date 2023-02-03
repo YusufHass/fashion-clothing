@@ -11,29 +11,29 @@ export const CategoriesContext = createContext({
   categoriesMap: {},
 });
 
-export const CATERGORIES_ACTION_TYPES = {
-  SET_CATEGORIES_ITEM: "SET_CATEGORIES_ITEM",
-};
+// export const CATERGORIES_ACTION_TYPES = {
+//   SET_CATEGORIES_ITEM: "SET_CATEGORIES_ITEM",
+// };
 
-const categoryReducer = (state, action) => {
-  const { type, payload } = action;
+// const categoryReducer = (state, action) => {
+//   const { type, payload } = action;
 
-  switch (type) {
-    case CATERGORIES_ACTION_TYPES.SET_CATEGORIES_ITEM:
-      return { ...state, categoriesMap: payload };
-    default:
-      throw new Error(`unhandled type ${type} in categoryReducer`);
-  }
-};
+//   switch (type) {
+//     case CATERGORIES_ACTION_TYPES.SET_CATEGORIES_ITEM:
+//       return { ...state, categoriesMap: payload };
+//     default:
+//       throw new Error(`unhandled type ${type} in categoryReducer`);
+//   }
+// };
 
-const INITIAL_STATE= {
-    categoriesMap: {}
-}
+// const INITIAL_STATE= {
+//     categoriesMap: {}
+// }
 export const CategoriesProvider = ({ children }) => {
   //default value is assigned as products
-//   const [categoriesMap, setCategoriesMap] = useState({});
+  const [categoriesMap, setCategoriesMap] = useState({});
   
-  const [{categoriesMap}, dispatch] = useReducer(categoryReducer, INITIAL_STATE);
+  // const [{categoriesMap}, dispatch] = useReducer(categoryReducer, INITIAL_STATE);
 
   //this useEffect is used to write ourdata into the db and once we successfully added to the db then we can delete it since we need it once only
 
