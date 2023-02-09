@@ -6,8 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "../src/contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
+
+import {store} from '../src/store/store'
+//Provide used to wrap the redux
+import { Provider } from "react-redux";
+
 ReactDOM.render(
   <React.StrictMode>
+    {/* Provider wraps and gives all access to the reducers */}
+    <Provider store= {store}>
     {/* BrowserRouter now has wrapped the entire App which 
         means the whole application is included */}
     <BrowserRouter>
@@ -22,6 +29,7 @@ ReactDOM.render(
         </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
