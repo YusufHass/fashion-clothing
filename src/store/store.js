@@ -5,7 +5,7 @@
 
 // we need to import three libraries from redux core
 
-import {compose, createStore, appplyMiddleware} from 'redux';
+import {compose, createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger'
 //reducer allow the store work by forming the state object 
 
@@ -28,8 +28,27 @@ const middleWares= [logger]
 //composedEnhancers does is passed every middleWares we have and compose them. 
 //Example, we could have 'const middleWares= [logger, middleWare1,middleWare2,middleWare3]'
 
-const composedEnhancers= compose(appplyMiddleware(...middleWares))
+const composedEnhancers= compose(applyMiddleware(...middleWares));
 
 //now the store is created and we need to wrap this 'store' using 
 //inside index.js using a provider
-export const store= createStore(rootReducer, undefined, middleWares)
+//all store needs is rootReducer and the rootReducer is the combination of all individual
+export const store= createStore(rootReducer, undefined, composedEnhancers)
+
+
+
+
+// import { compose, createStore, applyMiddleware } from 'redux';
+// import logger from 'redux-logger';
+
+// import { rootReducer } from './root-reducer';
+
+// // const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(
+// //   Boolean
+// // );
+// const middleWares = [logger];
+ 
+
+// const composedEnhancers = compose(applyMiddleware(...middleWares));
+
+// export const store = createStore(rootReducer, undefined, composedEnhancers);

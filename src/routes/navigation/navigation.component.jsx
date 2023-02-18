@@ -8,14 +8,25 @@ import Shop from "../shop/shop.component";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import {CartContext } from "../../contexts/cart.context";
+
+//the data in the redux  is extracted using the useSelected hook
+
+import { useSelector } from "react-redux";
+
+import { selectCurrentUser } from "../../store/user/user.selector";
+
 const Navigation = () => {
   //currentUser is distructured from the UserContext component which
   //the value is set inside sign-in component using setCurrentUser
-  const { currentUser } = useContext(UserContext);
+  
+  // const { currentUser } = useContext(UserContext);
+
+  const currentUser= useSelector(selectCurrentUser);
   const {isCartOpen}= useContext(CartContext)
-  // console.log(currentUser);
+   console.log("labtop",currentUser);
 
   return (
+
     <Fragment>
       <NavigationContainer>
       {/* <div className="navigation"> */}
