@@ -8,7 +8,9 @@ import './directory-list.styles.scss'
 /* We brought the categories from the home component to this component and here 
 in addition to the orginal component we also add the route so when we 
 click each of the categories then it will takes us to the 
-shop home page where we listed the categories items */
+shop home page where we listed the categories items
+
+the final is the following of the barcode and the amoount of the final items*/
 const catagories = [
   {
     id: 1,

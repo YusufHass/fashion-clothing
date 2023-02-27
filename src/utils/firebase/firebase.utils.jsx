@@ -73,6 +73,7 @@ export const getCatagoriesAndDocuments= async ()=>{
   const collectionRef= collection(db, 'categories');
   const q= query(collectionRef);
   const querySnapshot= await getDocs(q);
+
   const categoryMap=querySnapshot.docs.reduce((accumulator,
     docSnapshot)=>{
 
@@ -81,6 +82,8 @@ export const getCatagoriesAndDocuments= async ()=>{
       return accumulator;
     },{})
     return categoryMap;
+
+  // return querySnapshot.docs.map(doSnapShot=>doSnapShot.data())
 }
 
 googleProvider.setCustomParameters({

@@ -10,7 +10,7 @@ import {
 import { async } from "@firebase/util";
 import "./sign-in-form.styles.scss";
 import Button, {BUTTON_TYPES_CLASSES} from "../../button/button.component";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFeilds = {
   email: "",

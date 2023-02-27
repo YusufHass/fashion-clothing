@@ -1,12 +1,16 @@
 import SHOP_DATA from "../../shops-data.json";
-import { CategoriesContext } from "../../contexts/categories.context";
+// import { CategoriesContext } from "../../contexts/categories.context";
 import { useContext, Fragment } from "react";
 import ProductCard from "../../product-card/product-card.component";
 
 import CategoryPreview from "../../components/category-preview/category-preview";
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
 const CategoriesPreview = () => {
   // the following categoriesMap recieves the categories from the categoreies conetext
-  const { categoriesMap } = useContext(CategoriesContext);
+  // const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap= useSelector(selectCategoriesMap);
+
   return (
     
     <Fragment>

@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles";
 import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
@@ -20,6 +20,13 @@ const Navigation = () => {
   //the value is set inside sign-in component using setCurrentUser
   
   // const { currentUser } = useContext(UserContext);
+/*useSelector is a hook where you passed selector. selector function is where it
+// extracts the data you want from the entire redux store
+//so selector recieved the entire state [or the whole data of redux ]
+and if we want specific user data such as the user then we say the state.user and then it fetchs the user data
+
+*/
+// const selectCurrentUser= useSelector((state)=> state.user.currentUser);
 
   const currentUser= useSelector(selectCurrentUser);
   const {isCartOpen}= useContext(CartContext)

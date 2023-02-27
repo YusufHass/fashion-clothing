@@ -5,5 +5,7 @@
  */
 
 export const USER_ACTION_TYPES= {
-    SET_CURRENT_USER: 'SET_CURRENT_USER',
+  // '/user' gives aditional information that which section of store this action governed
+  //and in this case this applies for the 'user store'
+    SET_CURRENT_USER: 'user/SET_CURRENT_USER',
   }

@@ -4,20 +4,15 @@
 import { USER_ACTION_TYPES } from "./user.types";
 
   export const INITIAL_STATE= {
-    currentUser: null,
+    currentUser: 'yesuf',
   }
 /*with useContext, we passed to useReducer hook an INITIAL_STATE and the userReducer
 know the first state is the initial state. But since we dont 
 use useReducer hook here we need to give the state intial value*/
 
- export const userReducer= (state=INITIAL_STATE, action= {})=>{
-    // console.log('dispatched');
-    // console.log(action);
+ export const userReducer= (state=INITIAL_STATE, action)=>{
   
     const {type, payload}= action;
-
-
-  
 // //in this case we have only one state that we are updating thus 
     // we have only one switch statement and if the state is 
     // not updating error will throw

@@ -4,6 +4,7 @@
 // combineReducers allows us combine all small reducers
 import { combineReducers} from "redux";
 import { userReducer } from './user/user-reducer'
+import { categoriesReducer } from "./categories/category.reducer";
 
 /*
 so the root reducer, passes all reducers we have as a key and value
@@ -33,6 +34,7 @@ read here for more https://www.freecodecamp.org/news/what-is-a-pure-function-in-
 export const rootReducer= combineReducers({
 //key= user, value= reducer
     user:userReducer,
+    categories:categoriesReducer,
 
 })
 

@@ -9,7 +9,7 @@ import {
 import { async } from "@firebase/util";
 import './sign-up-form.styles.scss'
 import Button from "../../button/button.component";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 const defaultFormFeilds = {
   displayName: "",
   email: "",
@@ -41,6 +41,7 @@ const SIgnUpForm = () => {
         email,
         password
       );
+
       //sets the user into the setCurrentUser state and shows the updated value in the currentUser of navigation component
       // setCurrentUser(user);
       await createUserDocumentFromAuth(user, { displayName });
