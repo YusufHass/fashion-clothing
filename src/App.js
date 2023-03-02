@@ -56,8 +56,9 @@ it in the App.js makes it execute first
        */
       dispatch(setCurrentUser(user));
     });
-    return unsubscribe;
     {console.log("Here is yesuf")}
+    return unsubscribe;
+
 
     //this useEffect only runs once to initailize
     //createUserDocumentFromAuth(user) listner

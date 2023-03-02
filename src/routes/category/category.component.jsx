@@ -10,16 +10,18 @@ import { selectCategoriesMap } from "../../store/categories/category.selector";
 import "./category.styles.scss";
 
 const Category = () => {
+  console.log("render/re-rendering category component");
   //useParms used to generate the path 'category' in the shops.component
   const { category } = useParams();
   // const { categoriesMap } = useContext(CategoriesContext);
-
+//useSelector runs everytime the rootReducer changes the state.
   const categoriesMap= useSelector(selectCategoriesMap);
   //since categoriesMap use async data generation the we have to
   //wait untile the async data properly generated and populated to products. Otherwise the product would be empty since it runs sync and would couse error on the program
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
+  console.log("effect fired calling setProducts");
     setProducts(categoriesMap[category]);
     // unless the category and categoriesMap have changed, the useEffect will not updated
   }, [category, categoriesMap]);
