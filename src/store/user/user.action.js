@@ -18,6 +18,10 @@ the 'type' is USER_ACTION_TYPES and the value is the 'user' from the payload
  // this function doesnt dispatching it just creats an object and 
  //we need to dispatch it inside App.js
  
+ //the 'user' is represeting the 'payload' declared inside reducer.util.js as creatAction function arguments
+ //the USER_ACTION_TYPES is representing the 'type' declared inside reducer.util.js as creatAction function arguments
+
+ 
  export const setCurrentUser = (user)=> 
      creatAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);
  

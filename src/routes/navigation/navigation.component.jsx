@@ -40,7 +40,6 @@ and if we want specific user data such as the user then we say the state.user an
         <LogoContainer to="/">
           <FashionClothingLogo className="logo" />
         </LogoContainer>
-        
         {/* <div className="nav-links-container"> */}
         <NavLinksContainer>
         <NavLink to="/shop">

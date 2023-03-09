@@ -11,8 +11,8 @@ import styled from 'styled-components';
 //the benefit of using styled is that the styled components will assigned 
 //a unique identification for each component so the 
 //there will be no overlap. With .scss we need to
-//make sure all of the style name must be unique otherwise if we
-// use similar name in two different components then the style of will overlap with the other
+//make sure all of the style name must be unique name otherwise if we
+// use similar name in two different components or more then the style of will overlap with the other
 // example the following NavigationContainer will have unique id so if we use similar name in differt componet then the style will not be similar bc of the assigned unique name
 //
 
@@ -41,7 +41,7 @@ margin-bottom: 25px;
 //   }
 
 export const LogoContainer= styled(Link)`
-     height: 100%;
+    height: 100%;
     width: 70px;
     padding: 25px;
 
