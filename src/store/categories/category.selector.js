@@ -14,10 +14,8 @@
 
 import { createSelector } from "reselect";
 //categories is declared inside the root-Reducer.js and it calles the categoriesReducer
-export const selectCategoryReducer= (state)=>{
-  console.log("selector 1 fired")
-  return state.categories;
-}
+export const selectCategoryReducer= (state)=>
+ state.categories;
 
 export const selectCategories= createSelector(
   //this code will run first time and then the output will be save in the cache
