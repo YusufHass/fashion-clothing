@@ -6,6 +6,8 @@ import { combineReducers} from "redux";
 import { userReducer } from './user/user-reducer'
 import { categoriesReducer } from "./categories/category.reducer";
 
+import { cartReducer } from "./cart/cart.reducer";
+
 /*
 so the root reducer, passes all reducers we have as a key and value
 
@@ -35,6 +37,7 @@ export const rootReducer= combineReducers({
 //key= user, value= reducer
     user:userReducer,
     categories:categoriesReducer,
+    cart: cartReducer,
 
 })
 
