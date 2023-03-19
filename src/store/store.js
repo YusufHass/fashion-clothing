@@ -77,4 +77,3 @@ const composedEnhancers= compose(applyMiddleware(...middleWares));
 //inside index.js using a provider
 //all store needs is rootReducer and the rootReducer is the combination of all individual
 export const store= createStore(rootReducer, undefined, composedEnhancers)
-c
