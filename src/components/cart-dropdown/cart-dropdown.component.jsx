@@ -4,6 +4,8 @@ import CartItem from '../cart-item/cart-item.component'
 import { useContext} from 'react'
 import {CartContext} from '../../contexts/cart.context'
 import { useNavigate } from 'react-router-dom'
+import { selectCartCount} from '../../store/cart/cart.selector'
+import { useSelector } from 'react-redux'
 const CardDropDown=()=>{
 //using useNavigate component to navigate/path without using the route
     const navigate= useNavigate();
@@ -12,8 +14,8 @@ const CardDropDown=()=>{
 
         navigate('/checkout')
     }
-
-    const {cartItems}= useContext(CartContext)
+    // const {cartItems}= useContext(CartContext)
+    const cartItems= useSelector(selectCartCount)
     return(
         <CartDropDownStyle>
             <CartItemsStyle>

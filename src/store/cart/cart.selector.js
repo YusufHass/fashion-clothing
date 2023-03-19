@@ -6,13 +6,17 @@ export const  selectCartReducer= state=> state.cart;
 export const selectCartItems= createSelector(
 
     [selectCartReducer], 
-    (cart)=> cart.cartItems;
-)
+    (cart)=> {
+        return cart.cartItems
+    console.log("This is the cart selector")
+    }
+
+    )
 
 export const selectIsCartOpen= createSelector(
 
     [selectCartReducer],
-    (cart)=>cart.isCartOpen;
+    (cart)=>cart.isCartOpen
 )
 
 export const selectCartCount= createSelector(

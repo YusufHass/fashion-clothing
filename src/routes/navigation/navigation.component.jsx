@@ -14,6 +14,7 @@ import {CartContext } from "../../contexts/cart.context";
 import { useSelector } from "react-redux";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 const Navigation = () => {
   //currentUser is distructured from the UserContext component which
@@ -29,7 +30,8 @@ and if we want specific user data such as the user then we say the state.user an
 // const selectCurrentUser= useSelector((state)=> state.user.currentUser);
 
   const currentUser= useSelector(selectCurrentUser);
-  const {isCartOpen}= useContext(CartContext)
+  // const {isCartOpen}= useContext(CartContext)
+  const isCartOpen= useSelector (selectIsCartOpen)
    console.log("labtop",currentUser);
 
   return (

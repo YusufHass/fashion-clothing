@@ -64,8 +64,8 @@ We need to create middleWare for logger to work
 
  */
 // middleWare is a helper that runs before the action hits the reducer. So middleWare get the action first and shows what is happening with the action and all process
-const middleWares= [logger]
-// const middleWares= [loggerMiddleWare]
+// const middleWares= [logger]
+const middleWares= [loggerMiddleWare]
 
 
 //composedEnhancers does is passed every middleWares we have and compose them. 
@@ -77,3 +77,4 @@ const composedEnhancers= compose(applyMiddleware(...middleWares));
 //inside index.js using a provider
 //all store needs is rootReducer and the rootReducer is the combination of all individual
 export const store= createStore(rootReducer, undefined, composedEnhancers)
+c
