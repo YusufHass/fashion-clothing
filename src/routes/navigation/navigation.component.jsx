@@ -7,7 +7,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import Shop from "../shop/shop.component";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component";
-import {CartContext } from "../../contexts/cart.context";
+// import {CartContext } from "../../contexts/cart.context";
 
 //the data in the redux  is extracted using the useSelected hook
 
