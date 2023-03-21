@@ -8,6 +8,10 @@
 
 
 import {compose, createStore, applyMiddleware} from 'redux';
+
+import {persistReducer, persistStore} from 'redux-persist'
+//by default any web browser uses this local storage to store the data
+import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger'
 //reducer allow the store work by forming the state object 
 
@@ -32,6 +36,20 @@ withA(2,4);//3+2-4
 const with10= curryFun(10);
 with10(5,4);//10+5-4
 console.log("Here's", with10(4,4))
+
+const persistConfig= {
+  //this tells everything start from the *root*
+  key: 'root',
+  //storage
+  storage,
+  //blacklist array tells what we dont need to store.
+  //"user" reducer in the root-reducer.js for example dont need to be stored
+  //as it holds user login information. 
+  blacklist: ['user']
+}
+//this creats a persist reducer and will be used inside store by replacing
+// the rootReducer arguments as rootReducer is already passed here 
+const persistedReducer=persistReducer(persistConfig, rootReducer);
 
 //writing the loger middleware for the application
 //chained curry function
@@ -76,4 +94,10 @@ const composedEnhancers= compose(applyMiddleware(...middleWares));
 //now the store is created and we need to wrap this 'store' using 
 //inside index.js using a provider
 //all store needs is rootReducer and the rootReducer is the combination of all individual
-export const store= createStore(rootReducer, undefined, composedEnhancers)
+// export const store= createStore(rootReducer, undefined, composedEnhancers)
+export const store= createStore(persistedReducer, undefined, composedEnhancers)
+
+//with modifying store, now we can persist our date. for this persistor
+//data to work we need to update the index.js by wrapping the components
+//using persistGate along with 'persistor' we exported here
+export const persistor= persistStore(store)

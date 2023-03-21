@@ -45,15 +45,18 @@ import App from './App';
 // import { UserProvider } from './contexts/user.context';
 // import { CategoriesProvider } from './contexts/categories.context';
 import { CartProvider } from './contexts/cart.context';
-import { store } from './store/store';
+import { store, persistor} from './store/store';
 
 import './index.scss';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const rootElement = document.getElementById('root');
 
 render(
   <React.StrictMode>
      <Provider store={store}>
+      {/**loading null means that when render then dont render anything and it's optional */}
+     <PersistGate loading= {null} persistor={persistor} >
       <BrowserRouter>
         {/* <UserProvider> */}
           {/* <CategoriesProvider> */}
@@ -63,6 +66,7 @@ render(
           {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
       </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   rootElement
