@@ -4,7 +4,7 @@ import CartItem from '../cart-item/cart-item.component'
 import { useContext} from 'react'
 // import {CartContext} from '../../contexts/cart.context'
 import { useNavigate } from 'react-router-dom'
-import { selectCartCount} from '../../store/cart/cart.selector'
+import { selectCartItems} from '../../store/cart/cart.selector'
 import { useSelector } from 'react-redux'
 const CardDropDown=()=>{
 //using useNavigate component to navigate/path without using the route
@@ -15,7 +15,8 @@ const CardDropDown=()=>{
         navigate('/checkout')
     }
     // const {cartItems}= useContext(CartContext)
-    const cartItems= useSelector(selectCartCount)
+    //this cartItems displays the added items into the cart and if no items shows empty
+    const cartItems= useSelector(selectCartItems)
     return(
         <CartDropDownStyle>
             <CartItemsStyle>
