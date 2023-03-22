@@ -55,7 +55,9 @@ const rootElement = document.getElementById('root');
 render(
   <React.StrictMode>
      <Provider store={store}>
-      {/**loading null means that when render then dont render anything and it's optional */}
+      {/**loading* null means that when render then dont render nothing and it's optional 
+       * *persistor* should be the same name to the one we declare as 'persostor' in the store.js 
+       */}
      <PersistGate loading= {null} persistor={persistor} >
       <BrowserRouter>
         {/* <UserProvider> */}

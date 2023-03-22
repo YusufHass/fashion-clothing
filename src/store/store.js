@@ -16,26 +16,7 @@ import logger from 'redux-logger'
 //reducer allow the store work by forming the state object 
 
 import { rootReducer } from './root-reducer';
-
-
-
-//how to write our own logger instead of using the redux-logger
-// the following code customized code that is the written without using any library
-
-// the formaat of the middleware is the same/
-//we use curying which is a function which calls itself
- 
-//for example the followoing is the example of currying function
-const curryFun= (a)=> (b, c)=> {
-  return a+b-c
-}
-//here withA calls the function and passes 3 as its value. 
-//Then it calculates as the following
-const withA= curryFun(3);
-withA(2,4);//3+2-4
-const with10= curryFun(10);
-with10(5,4);//10+5-4
-console.log("Here's", with10(4,4))
+import { loggerMiddleWare } from './middleware/logger';
 
 const persistConfig= {
   //this tells everything start from the *root*
@@ -51,25 +32,6 @@ const persistConfig= {
 // the rootReducer arguments as rootReducer is already passed here 
 const persistedReducer=persistReducer(persistConfig, rootReducer);
 
-//writing the loger middleware for the application
-//chained curry function
-//first function recieves the store object then it returns the next method
-//the action follows
-const loggerMiddleWare= (store)=>(next)=>(action)=>{
-  //if no action then return next
-  if(!action.type){
-    return next(action)
-  }
-  //the following output is the same as the output we have in the redux-logger.
-  //we can use either the redux-logger or the customized code we have here 
-console.log('type', action.type)
-console.log('payload', action.payload)
-console.log('currentState', store.getState());
-//the following code shows the next state
-next (action);
-console.log('next state', store.getState());
-}
-
 /**
  store  takes 3 arguments, first rootReducer- it helps generate store and
   facilitate actions passed to each reducers.
@@ -81,10 +43,22 @@ before the action is dispatch, what the action is and how the state looks after 
 We need to create middleWare for logger to work
 
  */
-// middleWare is a helper that runs before the action hits the reducer. So middleWare get the action first and shows what is happening with the action and all process
+//middleWare is a helper that runs before the action hits the reducer. So middleWare get the action first and shows what is happening with the action and all process
 // const middleWares= [logger]
-const middleWares= [loggerMiddleWare]
+//we want the logger only to run/display the log or conslole.log when we are in 
+//the 'developement' mode and we dont want anything to show when in the 'production' 
+//therefor we we add [process.env.NODE_ENV!=='production' && logger].filter(Boolean)
+//development vs production is the way we identity
+//if we dont add .filter(Boolean) and we arent in development mode then it would display false without evaluating the 
+// loggerMiddleWare
+/*
 
+example: (2==3) && {a: 'string' }//false
+         [(2==3) && {a: 'string' }].filter(Boolean)// [ ]
+          [(3==3) && {a: 'string' }].filter(Boolean)// [{a: string }]
+
+*/
+const middleWares= [process.env.NODE_ENV !=='production' && logger].filter(Boolean);
 
 //composedEnhancers does is passed every middleWares we have and compose them. 
 //Example, we could have 'const middleWares= [logger, middleWare1,middleWare2,middleWare3]'
