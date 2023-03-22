@@ -60,10 +60,23 @@ example: (2==3) && {a: 'string' }//false
 */
 const middleWares= [process.env.NODE_ENV !=='production' && logger].filter(Boolean);
 
+/*Redux devtools is a tool which records our activity in the UI. 
+It's a chrome extenstion and we need to add it to the chrome in order it to work.
+ Then once we added it to the chrome, we can see the movement of the code, 
+ what is added, subtracted or any movement or what time is the event happens in our state.
+We can see the action, state, and all important info of the applictin.
+It records all activity and then we 
+can play them all to see back/forth the activiry.It helps us to see what was happening 
+ 
+Then after adding it to the chrome, we need to add the followind code in order for 
+us properly the redux devtools functiion in the UI/ we need to open the Redux devtools in the chrome
+once we run the program from here then we need to see all activities while we are not in the 'production' */
+//use REDUX_DEVTOOLS_EXTENSION_COMPOSE__) otherwise use regular 'compose'
+const composeEnhancer = (process.env.NODE_ENV!=='production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)|| compose;
 //composedEnhancers does is passed every middleWares we have and compose them. 
 //Example, we could have 'const middleWares= [logger, middleWare1,middleWare2,middleWare3]'
 
-const composedEnhancers= compose(applyMiddleware(...middleWares));
+const composedEnhancers= composeEnhancer(applyMiddleware(...middleWares));
 
 //now the store is created and we need to wrap this 'store' using 
 //inside index.js using a provider
