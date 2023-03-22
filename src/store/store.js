@@ -13,15 +13,18 @@ import {persistReducer, persistStore} from 'redux-persist'
 //by default any web browser uses this local storage to store the data
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger'
+//importing a thunk
+import thunk from 'redux-thunk';
 //reducer allow the store work by forming the state object 
 
 import { rootReducer } from './root-reducer';
+//self written function for the middleware
 import { loggerMiddleWare } from './middleware/logger';
-
+//using to store data in the storage for permanent stay
 const persistConfig= {
   //this tells everything start from the *root*
   key: 'root',
-  //storage
+  //storage in the local web
   storage,
   //blacklist array tells what we dont need to store.
   //"user" reducer in the root-reducer.js for example dont need to be stored
@@ -57,8 +60,9 @@ example: (2==3) && {a: 'string' }//false
          [(2==3) && {a: 'string' }].filter(Boolean)// [ ]
           [(3==3) && {a: 'string' }].filter(Boolean)// [{a: string }]
 
+          //added the thunk to the middleware
 */
-const middleWares= [process.env.NODE_ENV !=='production' && logger].filter(Boolean);
+const middleWares= [process.env.NODE_ENV !=='production' && logger, thunk].filter(Boolean);
 
 /*Redux devtools is a tool which records our activity in the UI. 
 It's a chrome extenstion and we need to add it to the chrome in order it to work.
