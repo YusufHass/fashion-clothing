@@ -26,7 +26,7 @@ export const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action = {})
   switch (type) {
     //modifying for redux-thunk
     case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START: return {...state, isLoading:true }
-    //if success then set the value and makas isLoading=false
+    //if success then set the value and makas isLoading=false as it was turned true in the starat
     case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS: return {...state, categoriesInReducer: payload, isLoading:false }
     //if fails then return the state, and error is the payload we'll pass and isLoading is false
     case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED: return {...state, error: payload, isLoading:false }
