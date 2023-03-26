@@ -7,7 +7,7 @@ import CategoriesPreview from "../categories-preview/categories-preview.componen
 import Category from "../category/category.component";
 import { useEffect } from "react";
 import { getCatagoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { fetchCategoriesAsync } from "../../store/categories/category.action";
+import { fetchCategoriesAsync, fetchCategoriesStart } from "../../store/categories/category.action";
 import { useDispatch } from "react-redux";
 import "./shop-styles.scss";
 const Shop = () => {
@@ -25,12 +25,16 @@ const dispatch= useDispatch();
       // the action type and the recieved argument value
       // dispatch(setCategories(categoriesArray));
       /* 
-      the above async replaced by this thunk function and now the fetch is managed will
+      the above async replaced by this thunk function *fetchCategoriesAsync() below* and now the fetch is managed will
      it will show error, success, start etc.. and the above method didnt
       have such functionlity and was authomatically start fetchin and want handled any
       thing else
       */
-      dispatch(fetchCategoriesAsync());
+      // dispatch(fetchCategoriesAsync());
+      //fetchCategoriesAsync() is created created for thunk,
+      //with fetchCategoriesStart() we are created a saga 
+      dispatch(fetchCategoriesStart());
+
     // getCategoryMap();
   }, []);
   return (

@@ -14,12 +14,17 @@ import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger'
 //importing a thunk
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
+//redux-saga iibrary
+import createSagaMiddleware from '@redux-saga/core';
+
 //reducer allow the store work by forming the state object 
 
 import { rootReducer } from './root-reducer';
 //self written function for the middleware
 import { loggerMiddleWare } from './middleware/logger';
+//rootSage 
+import { rootSaga } from './root-saga';
 //using to store data in the storage for permanent stay
 const persistConfig= {
   //this tells everything start from the *root*
@@ -31,6 +36,9 @@ const persistConfig= {
   //as it holds user login information. 
   blacklist: ['user']
 }
+//creats a saga middleware store instatiated 
+const sagaMiddleware= createSagaMiddleware();
+
 //this creats a persist reducer and will be used inside store by replacing
 // the rootReducer arguments as rootReducer is already passed here 
 const persistedReducer=persistReducer(persistConfig, rootReducer);
@@ -62,7 +70,8 @@ example: (2==3) && {a: 'string' }//false
 
           //added the thunk to the middleware
 */
-const middleWares= [process.env.NODE_ENV !=='production' && logger, thunk].filter(Boolean);
+// const middleWares= [process.env.NODE_ENV !=='production' && logger, thunk].filter(Boolean);
+const middleWares= [process.env.NODE_ENV !=='production' && logger, sagaMiddleware].filter(Boolean);
 
 /*Redux devtools is a tool which records our activity in the UI. 
 It's a chrome extenstion and we need to add it to the chrome in order it to work.
@@ -87,6 +96,8 @@ const composedEnhancers= composeEnhancer(applyMiddleware(...middleWares));
 //all store needs is rootReducer and the rootReducer is the combination of all individual
 // export const store= createStore(rootReducer, undefined, composedEnhancers)
 export const store= createStore(persistedReducer, undefined, composedEnhancers)
+//this calls the root sage
+sagaMiddleware.run(rootSaga);
 
 //with modifying store, now we can persist our date. for this persistor
 //data to work we need to update the index.js by wrapping the components

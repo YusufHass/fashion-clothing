@@ -30,24 +30,24 @@ import { CATEGORIES_ACTION_TYPES } from "./category.types";
 //added 'Async' at the end so it will be know it's a thunk
 //this function tells what to do at the start, success and fails
 //the function will be called inside shop-component.js
-  export const fetchCategoriesAsync= ()=>async (dispatch)=>{
-    //this makes start fetching method from the above
-    dispatch(fetchCategoriesStart());
-    try {
-      //categories is the table name and passing is optional just make us sure which
-    // table is fetching
-    //fetch the data from the db, then if succesful then sets the fetchCategoriesSucess
-    //with the fetched data
-      const categoriesArray = await getCatagoriesAndDocuments('categories');
-      dispatch(fetchCategoriesSucess(categoriesArray));
-    } catch (error){
-      //if failed then set the resulted error to the fetchCategoriesFailure which will be st
-      // as a payload in the categoryReducer 
-      dispatch(fetchCategoriesFailure (error))
+  // export const fetchCategoriesAsync= ()=>async (dispatch)=>{
+  //   //this makes start fetching method from the above
+  //   dispatch(fetchCategoriesStart());
+  //   try {
+  //     //categories is the table name and passing is optional just make us sure which
+  //   // table is fetching
+  //   //fetch the data from the db, then if succesful then sets the fetchCategoriesSucess
+  //   //with the fetched data
+  //     const categoriesArray = await getCatagoriesAndDocuments('categories');
+  //     dispatch(fetchCategoriesSucess(categoriesArray));
+  //   } catch (error){
+  //     //if failed then set the resulted error to the fetchCategoriesFailure which will be st
+  //     // as a payload in the categoryReducer 
+  //     dispatch(fetchCategoriesFailure (error))
 
-    }
+  //   }
 
 
 
-  }
+  // }
   
