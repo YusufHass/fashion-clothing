@@ -10,6 +10,8 @@ import {
 import { async } from "@firebase/util";
 import "./sign-in-form.styles.scss";
 import Button, {BUTTON_TYPES_CLASSES} from "../../button/button.component";
+import { useDispatch } from "react-redux";
+import { googgleSignInStart } from "../../store/user/user.action";
 // import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFeilds = {
@@ -19,6 +21,7 @@ const defaultFormFeilds = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFeilds);
   const { email, password } = formFields;
+  const dispatch= useDispatch();
   // console.log(formFields);
 
   //resets the form back to empty once we filled and submit the form
@@ -27,7 +30,6 @@ const SignInForm = () => {
   };
 //setCurrentUser is distructured from the UserContext component
   // const { setCurrentUser } = useContext(UserContext);
-
   const handleSubmit = async (event) => {
     //the preventDefault protects automatic submission without our permission
     event.preventDefault();
@@ -65,7 +67,9 @@ const SignInForm = () => {
     // const response = await signInWithGooglePopup();
     // console.log(response);
 
-     await signInWithGooglePopup();
+    //  await signInWithGooglePopup();
+
+    dispatch(googgleSignInStart());
   };
   const handleChanges = (event) => {
     const { name, value } = event.target;

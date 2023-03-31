@@ -15,9 +15,10 @@ import {
   onAuthStateChangedListner,
   signOutUser,
   createUserDocumentFromAuth,
+  getCurrentUser,
 } from "./utils/firebase/firebase.utils";
 
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession, setCurrentUser } from "./store/user/user.action";
 
 const ShowItems = () => {
   return (
@@ -39,14 +40,15 @@ userProvider in the index.js and replaced it into the redux.
 userContext was the top level and the first one to execute in the index.js and here putting 
 it in the App.js makes it execute first
 */
-  useEffect(() => {
+  // useEffect(() => {
     //unsubscribe makes disble the onAuthStateChangedListner when the state is unmount
-    const unsubscribe = onAuthStateChangedListner((user) => {
+    //it listens everytime a user changes
+    // const unsubscribe = onAuthStateChangedListner((user) => {
       // console.log(user)
       //if the user is new then create new user snapshot otherwise use the currentUser
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
+      // if (user) {
+      //   createUserDocumentFromAuth(user);
+      // }
       /**
        this dispatch works similar to the useContext but unlike useContext
        this redux dispatch dispatches to the root-reducer and then the root-reducer
@@ -54,16 +56,26 @@ it in the App.js makes it execute first
 
        we have only one dispatch in this app
        */
-      dispatch(setCurrentUser(user));
-    });
-    {console.log("Here is yesuf")}
-    return unsubscribe;
+    //   dispatch(setCurrentUser(user));
+    // });
+    // {console.log("Here is yesuf")}
+    // return unsubscribe;
 
 
     //this useEffect only runs once to initailize
     //createUserDocumentFromAuth(user) listner
     //and the value is always the same. We can pass the dispatch if warning  occurs
     //[dispatch]) but doesnt affect the code
+  // }, []);
+
+  //testing the new created Promise to replace the above observable async-await
+useEffect(()=>{
+
+// getCurrentUser().then((user)=>console.log('phone user is the',user));
+// // getCurrentUser();
+
+dispatch(checkUserSession());
+
   }, []);
 
   return (

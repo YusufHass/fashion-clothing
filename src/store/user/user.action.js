@@ -22,18 +22,29 @@ the 'type' is USER_ACTION_TYPES and the value is the 'user' from the payload
  //the USER_ACTION_TYPES is representing the 'type' declared inside reducer.util.js as creatAction function arguments
 
  
- export const setCurrentUser = (user)=> 
+export const setCurrentUser = (user)=> 
      creatAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);
  
  
     // console.log("user is ", user)
     // console.log("action is ", USER_ACTION_TYPES)
 
-   
+export const checkUserSession= ()=>
+//we can pass single argument oppose to the decleration of the functon argument
+//since the second argument is unimportant to the *creatAction* function and we dont use it and 
+//it default makes undefine or gives it null
+creatAction(USER_ACTION_TYPES.CHECK_USER_SESSION);
+export const googgleSignInStart= (user)=>
+creatAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
+//we can pass the second argument as a an object if we need to pass more than what we declare for and in *creatAction*
+//we declared it to take to parameters but wented to pass three and the object with a comman counts as 1 
+//argument no matter how many arguments the object has...
+export const emailSignInStart= (email, password)=>{
+creatAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, {email,password})
+}
+
+//displays the user information if it's a success 
+export const signInSuccess= (user)=>creatAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user);
 
 
-
-// import { USER_ACTION_TYPES } from './user.types';
-// import { creatAction } from '../../utils/reducer/reducer.util';
-// export const setCurrentUser = (user) =>
-// creatAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);
+export const signInFailed= (error)=>creatAction(USER_ACTION_TYPES.SIGN_IN_FAILED,error);

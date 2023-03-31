@@ -3,3 +3,27 @@ the title and icon has changed in the index.html.
 to change the icon download, the icon you want, save it inside the public folder, and delete already existed favicon.ico file and change the downloaded icon file name to favicon.ico
 
 https://www.iconfinder.com/icons/2104704/blowing_whistle_coach_whistle_instrument_icon
+
+
+git information
+
+changing a branch name from an existing to the new name in the remote as well local
+
+Steps for changing a branch name:
+
+	1. First change the existed branch name by the new name
+	 git branch -m old-branch new-branch
+	Example:
+	
+	$git branch -m Lesson-42-redux-sagas-and-its-usage Lesson-42-redux-sagas-converting-category-comp-from-redux-thunk-to-redux-saga
+	
+	2. Then push the new changed name to the GitHub repo
+	git push origin new-name
+	
+	Example:
+	$ git push -u origin Lesson-42-redux-sagas-converting-category-comp-from-redux-thunk-to-redux-saga
+	
+	3. Delete the old branch from the GitHub repo
+	
+	$ git push origin --delete branch-name //this deletes the existed branch example:
+	$ git push origin --delete Lesson-42-redux-sagas-and-its-usage

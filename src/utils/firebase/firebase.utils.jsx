@@ -137,7 +137,9 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
         }
       }
       //otherwise if the userDocRef is true then return it
-      return userDocRef;
+      // return userDocRef;
+      return userSnapShot;
+
     }
   export const createAuthUserWithEmailAndPasswor= async (email, password)=>{
     //if either password or email is missing then do nothing
@@ -161,4 +163,32 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
   export const onAuthStateChangedListner=(callback)=>{
 
     onAuthStateChanged(auth, callback)
+  }
+
+//the the sign-in or sign-out async-await doesnt  have any issue but the following 
+//code is to practice the use of redux-saga and convert from async-await to redux-saga
+  export const getCurrentUser = ()=>{
+    //changing from observable listener which is the above *onAuthStateChangedListner*
+    // to a Promise based function call
+
+    //resolve is for sucess and reject for fail
+    return new Promise((resolve, reject)=>{
+      //since this is a Promise, we dont actualy want it to stay active,
+      //instead we want unsubscribe the moment we get a value
+      //*onAuthStateChanged* is getting from a *firebase* directly since we want to modify it
+      // is not from *onAuthStateChangedListnerthe* the function we created above
+      const unsubscribe= onAuthStateChanged(auth, 
+        //onAuthStateChanged take auth, and a callback *userAuth*
+        //userAuth gives us the user immidiatly when it's successfull and user exists
+        (userAuth)=>{
+        //then immidiatly unsubscrabe means it closes it and will save 
+        //a memory link which could make the listener always active 
+        unsubscribe();
+        resolve(userAuth);
+      }, 
+        //third optional parameter is the reject and which can passed anything we want
+        //usually error passed
+       reject
+      );
+    });
   }
