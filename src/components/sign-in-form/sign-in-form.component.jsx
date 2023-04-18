@@ -1,17 +1,17 @@
 import { useState, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
-import {
-  auth,
-  createUserDocumentFromAuth,
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+// import {
+//   auth,
+//   createUserDocumentFromAuth,
+//   signInWithGooglePopup,
+//   signInAuthUserWithEmailAndPassword,
+// } from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
 import "./sign-in-form.styles.scss";
 import Button, {BUTTON_TYPES_CLASSES} from "../../button/button.component";
 import { useDispatch } from "react-redux";
-import { googgleSignInStart } from "../../store/user/user.action";
+import { emailSignInStart, googgleSignInStart } from "../../store/user/user.action";
 // import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFeilds = {
@@ -35,10 +35,11 @@ const SignInForm = () => {
     event.preventDefault();
     //try sign in using email and password
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      // const { user } = await signInAuthUserWithEmailAndPassword(
+      //   email,
+      //   password
+      // );
+      dispatch(emailSignInStart(email, password));
       // console.log(user);
       //set the user value what ever the respond is
       // setCurrentUser(user);

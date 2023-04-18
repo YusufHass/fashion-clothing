@@ -34,7 +34,7 @@ export const checkUserSession= ()=>
 //since the second argument is unimportant to the *creatAction* function and we dont use it and 
 //it default makes undefine or gives it null
 creatAction(USER_ACTION_TYPES.CHECK_USER_SESSION);
-export const googgleSignInStart= (user)=>
+export const googgleSignInStart=(user)=>
 creatAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
 //we can pass the second argument as a an object if we need to pass more than what we declare for and in *creatAction*
 //we declared it to take to parameters but wented to pass three and the object with a comman counts as 1 
