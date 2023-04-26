@@ -9,6 +9,8 @@ import {
 import { async } from "@firebase/util";
 import './sign-up-form.styles.scss'
 import Button from "../../button/button.component";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action";
 // import { UserContext } from "../../contexts/user.context";
 const defaultFormFeilds = {
   displayName: "",
@@ -24,6 +26,8 @@ const SIgnUpForm = () => {
 
   // const {setCurrentUser}= useContext(UserContext);
 
+ const dispatch= useDispatch();
+
   const resetFormFields = () => {
     setFormFields(defaultFormFeilds);
   };
@@ -36,15 +40,18 @@ const SIgnUpForm = () => {
     }
     //otherwise if they match
     try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      // const { user } = await createUserWithEmailAndPassword(
+      //   auth,
+      //   email,
+      //   password
+      // );
+      // //sets the user into the setCurrentUser state and shows the updated value in the currentUser of navigation component
+      // // setCurrentUser(user);
+      // await createUserDocumentFromAuth(user, { displayName });
 
-      //sets the user into the setCurrentUser state and shows the updated value in the currentUser of navigation component
-      // setCurrentUser(user);
-      await createUserDocumentFromAuth(user, { displayName });
+      //replaced with the redux-sage
+      dispatch(signUpStart(email, password, displayName));
+
       //resets the form field empty once the form has submitted
       resetFormFields();
       // console.log(user);

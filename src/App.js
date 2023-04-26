@@ -11,12 +11,12 @@ import Checkout from "./routes/checkout/checkout.component";
 import { useDispatch } from "react-redux";
 
 import { useEffect } from "react";
-import {
-  onAuthStateChangedListner,
-  signOutUser,
-  createUserDocumentFromAuth,
-  getCurrentUser,
-} from "./utils/firebase/firebase.utils";
+// import {
+//   onAuthStateChangedListner,
+//   signOutUser,
+//   createUserDocumentFromAuth,
+//   getCurrentUser,
+// } from "./utils/firebase/firebase.utils";
 
 import { checkUserSession, setCurrentUser } from "./store/user/user.action";
 

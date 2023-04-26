@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 // import { UserContext } from "../../contexts/user.context";
 import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles";
 import { ReactComponent as FashionClothingLogo } from "../../asset/crown.svg";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
 import Shop from "../shop/shop.component";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -11,11 +11,11 @@ import CardDropDown from "../../components/cart-dropdown/cart-dropdown.component
 
 //the data in the redux  is extracted using the useSelected hook
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
-
+import { signOutStart } from "../../store/user/user.action";
 const Navigation = () => {
   //currentUser is distructured from the UserContext component which
   //the value is set inside sign-in component using setCurrentUser
@@ -28,11 +28,13 @@ and if we want specific user data such as the user then we say the state.user an
 
 */
 // const selectCurrentUser= useSelector((state)=> state.user.currentUser);
-
+const dispatch=useDispatch();
   const currentUser= useSelector(selectCurrentUser);
   // const {isCartOpen}= useContext(CartContext)
   const isCartOpen= useSelector (selectIsCartOpen)
    console.log("labtop",currentUser);
+
+   const signOutUser=()=>dispatch(signOutStart());
 
   return (
 

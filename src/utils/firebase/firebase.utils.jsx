@@ -141,16 +141,15 @@ export const createUserDocumentFromAuth= async(userAuth, additionalInformation={
       return userSnapShot;
 
     }
-  export const createAuthUserWithEmailAndPasswor= async (email, password)=>{
+  export const createAuthUserWithEmailAndPassword= async (email, password)=>{
     //if either password or email is missing then do nothing
-    if(!email || !password) return
-
-    return await createAuthUserWithEmailAndPasswor(auth, email,password)
-  }
+    if(!email || !password) return;
+    return await createUserWithEmailAndPassword(auth, email,password);
+  };
 
   export const signInAuthUserWithEmailAndPassword= async (email, password)=>{
     //if either password or email is missing then do nothing
-    if(!email || !password) return
+    if(!email || !password) return;
 
     return await signInWithEmailAndPassword(auth, email,password)
   }
